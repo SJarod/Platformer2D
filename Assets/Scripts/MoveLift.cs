@@ -21,7 +21,6 @@ public class MoveLift : MonoBehaviour
         if (Input.GetButton("Vertical"))
             transform.Translate(Vector3.up * Input.GetAxis("Vertical") * liftSpeed * Time.deltaTime);
 
-        //TODO : launch box to take out enemies
         //TODO : new range for new level
         float maxHeight = player.transform.position.y + 2.5f;
         float minHeight = player.transform.position.y - 2.5f;
