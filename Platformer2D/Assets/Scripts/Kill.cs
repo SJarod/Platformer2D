@@ -2,43 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameOver : MonoBehaviour
+public class Kill : MonoBehaviour
 {
-    GameObject player;
-
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag != "Player")
+        if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "Obstacle")
             return;
 
         ContactPoint[] contacts = new ContactPoint[8];
 
+        Debug.Log("salut");
         for (int i = 0; i < collision.GetContacts(contacts); ++i)
         {
-            if (contacts[i].normal.y >= 0.0f)
+            Debug.Log(i);
+            Debug.Log(contacts[i].normal.y);
+            if (contacts[i].normal.y <= 0.0f)
             {
                 //Debug.Log("GAME OVER");
                 //Application.Quit();
-                Respawn(collision.gameObject);
+                Destroy(this.gameObject);
                 break;
             }
         }
-    }
-
-    private void Respawn(GameObject player)
-    {
-        player.transform.position = new Vector3(0, 3, 0);
     }
 }

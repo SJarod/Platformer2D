@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameOver : MonoBehaviour
+public class Lava : MonoBehaviour
 {
     GameObject player;
 
@@ -15,26 +15,14 @@ public class GameOver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (player.transform.position.y <= -15)
+            Respawn(player);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag != "Player")
-            return;
-
-        ContactPoint[] contacts = new ContactPoint[8];
-
-        for (int i = 0; i < collision.GetContacts(contacts); ++i)
-        {
-            if (contacts[i].normal.y >= 0.0f)
-            {
-                //Debug.Log("GAME OVER");
-                //Application.Quit();
-                Respawn(collision.gameObject);
-                break;
-            }
-        }
+        if (collision.gameObject.tag == "Player")
+            Respawn(collision.gameObject);
     }
 
     private void Respawn(GameObject player)

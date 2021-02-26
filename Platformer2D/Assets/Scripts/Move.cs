@@ -15,7 +15,8 @@ public class Move : MonoBehaviour
     public float jumpForce = 10.0f;
 
     //-1 : left, 1 : right
-    int direction = 1;
+    int direction = 0;
+    public int orientation = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -27,29 +28,32 @@ public class Move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Horizontal"))
+        if (!Input.GetButton("Horizontal"))
+            direction = 0;
+        else
         {
-            rb.AddForce(cam.transform.right * Input.GetAxis("Horizontal") * moveSpeed * rb.mass);
+            float input = Input.GetAxis("Horizontal");
+            direction = (int)(input / Mathf.Abs(input));
         }
 
-        if (direction == -1 && Input.GetKey(KeyCode.D))
+        if (orientation == -1 && Input.GetKey(KeyCode.D))
         {
-            transform.Rotate(Vector3.up, 180 * direction);
-            direction = 1;
+            transform.Rotate(Vector3.up, 180 * orientation);
+            orientation = 1;
         }
-        if (direction == 1 && Input.GetKey(KeyCode.A))
+        if (orientation == 1 && Input.GetKey(KeyCode.A))
         {
-            transform.Rotate(Vector3.up, 180 * direction);
-            direction = -1;
+            transform.Rotate(Vector3.up, 180 * orientation);
+            orientation = -1;
         }
 
-        if (!isJumping && Input.GetButtonDown("Jump"))
+        if (!isJumping && Input.GetButton("Jump"))
         {
             isJumping = true;
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
-        rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -10, 10), rb.velocity.y, rb.velocity.z);
+        rb.velocity = new Vector3(direction * 10, rb.velocity.y, 0);
     }
 
     private void OnCollisionEnter(Collision collision)
