@@ -7,6 +7,11 @@ public class FocusPlayer : MonoBehaviour
     GameObject player;
     GameObject lift;
 
+    [SerializeField] private float smooth = 5f;
+    [SerializeField] private float liftZoomSpeed = 1.5f;
+
+    public Vector3 offset = new Vector3(0, 3.0f, -12.0f);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,13 +21,22 @@ public class FocusPlayer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        transform.position = new Vector3(lift.transform.position.x,
-                                         player.transform.position.y,
-                                         -(Mathf.Abs(lift.transform.position.y - player.transform.position.y)));
-        transform.Translate(new Vector3(0, 3, -12));
+        Vector3 newPos = new Vector3(lift.transform.position.x,
+                                     lift.transform.position.y,
+                                     -(Mathf.Abs(lift.transform.position.y - player.transform.position.y) * liftZoomSpeed));
 
-        //coroutine pour fluidifier la rotation
+        transform.position = Vector3.Lerp(transform.position, newPos + offset, smooth * Time.fixedDeltaTime);
+    }
+
+    public void zoomIn()
+    {
+        offset = new Vector3(0, 3.0f, -12.0f);
+    }
+
+    public void zoomOut(Vector3 value)
+    {
+        offset = value;
     }
 }

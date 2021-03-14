@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Move))]
-
 public class ShootBox : MonoBehaviour
 {
     Rigidbody rbBox;
@@ -13,7 +11,7 @@ public class ShootBox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        move = GetComponent<Move>();
+        move = GetComponentInParent<Move>();
     }
 
     // Update is called once per frame
@@ -25,17 +23,17 @@ public class ShootBox : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             rbBox.AddForce(Vector3.up * 10, ForceMode.Impulse);
-            rbBox.AddForce(Vector3.right * move.orientation * 100, ForceMode.Impulse);
+            rbBox.AddForce(Vector3.right * move.getOrientation() * 100, ForceMode.Impulse);
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Obstacle")
-            rbBox = collision.gameObject.GetComponent<Rigidbody>();
+        if (other.gameObject.tag == "Obstacle")
+            rbBox = other.gameObject.GetComponent<Rigidbody>();
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
         rbBox = null;
     }

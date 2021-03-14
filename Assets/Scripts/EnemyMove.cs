@@ -22,19 +22,14 @@ public class EnemyMove : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (direction == 1 && transform.position.z < -15)
-        {
-            transform.Rotate(Vector3.up, 180);
-            direction = -1;
-        }
-        if (direction == -1 && transform.position.z > 15)
-        {
-            transform.Rotate(Vector3.up, 180);
-            direction = 1;
-        }
-
         rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, -direction * 10);
+    }
+
+    public void rotation180()
+    {
+        transform.Rotate(Vector3.up, 180);
+        direction *= -1;
     }
 }

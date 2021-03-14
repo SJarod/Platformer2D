@@ -16,13 +16,19 @@ public class Lava : MonoBehaviour
     void Update()
     {
         if (player.transform.position.y <= -15)
+        {
+            player.GetComponent<Player>().takeDamage();
             Respawn(player);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
+        {
+            player.GetComponent<Player>().takeDamage();
             Respawn(collision.gameObject);
+        }
     }
 
     private void Respawn(GameObject player)

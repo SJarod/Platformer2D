@@ -7,6 +7,8 @@ TagManager:
   - Obstacle
   - Lift
   - Enemy
+  - Platform
+  - Trigger
   layers:
   - Default
   - TransparentFX
