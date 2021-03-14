@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BackgroundCamera : MonoBehaviour
 {
-    [SerializeField] private float speed = 0.2f;
-
     private Camera mainCam;
+
+    private float mainOffset = 56.3f;
 
     // Start is called before the first frame update
     void Start()
@@ -17,8 +17,8 @@ public class BackgroundCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int offset = (int)(mainCam.transform.position.x / 56.3f);
+        int offset = (int)(mainCam.transform.position.x / mainOffset);
 
-        transform.position = new Vector3(mainCam.transform.position.x - offset * 56.3f, transform.position.y, 0);
+        transform.position = new Vector3(mainCam.transform.position.x - offset * mainOffset, transform.position.y, 0);
     }
 }

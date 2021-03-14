@@ -8,7 +8,8 @@ public class EnemyMove : MonoBehaviour
 {
     Rigidbody rb;
 
-    public float moveSpeed = 20.0f;
+    public float moveSpeed = 10.0f;
+    public Vector3 dirAxis = new Vector3(0, 0, 1);
 
     //-1 : left, 1 : right
     int direction;
@@ -24,7 +25,7 @@ public class EnemyMove : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, -direction * 10);
+        rb.velocity = dirAxis * -direction * moveSpeed;
     }
 
     public void rotation180()

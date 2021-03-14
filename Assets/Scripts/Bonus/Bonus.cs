@@ -6,11 +6,14 @@ public enum Buffs
 {
     BOOSTMAXLIFT,
     BOOSTJUMP,
+    BOOSTSPEED,
 
     ENDMAXLIFT,
     ENDJUMP,
+    ENDSPEED,
 
     CHECKPOINT,
+    END,
     HEAL,
 }
 
@@ -44,7 +47,12 @@ public class Bonus : MonoBehaviour
                 }
             case Buffs.BOOSTJUMP:
                 {
-                    other.GetComponent<Move>().jumpForce = 40.0f;
+                    other.GetComponent<Move>().jumpForce = 20;
+                    break;
+                }
+            case Buffs.BOOSTSPEED:
+                {
+                    other.GetComponent<Move>().moveSpeed = 20;
                     break;
                 }
             case Buffs.ENDMAXLIFT:
@@ -54,7 +62,14 @@ public class Bonus : MonoBehaviour
                 }
             case Buffs.ENDJUMP:
                 {
-                    other.GetComponent<Move>().jumpForce = 20.0f;
+                    Move move = other.GetComponent<Move>();
+                    move.jumpForce = move.getBaseJumpForce();
+                    break;
+                }
+            case Buffs.ENDSPEED:
+                {
+                    Move move = other.GetComponent<Move>();
+                    move.moveSpeed = move.getBaseMoveSpeed();
                     break;
                 }
             case Buffs.CHECKPOINT:

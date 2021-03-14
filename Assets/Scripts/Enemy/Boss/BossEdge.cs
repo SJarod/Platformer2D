@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyEdge : MonoBehaviour
+public class BossEdge : MonoBehaviour
 {
-    EnemyMove enemy;
+    //left : -1, right : 1
+    public int sideEdge = 1;
+
+    BossMove boss;
 
     // Start is called before the first frame update
     void Start()
@@ -20,10 +23,10 @@ public class EnemyEdge : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag != "Enemy")
+        if (!other.CompareTag("BossEntity"))
             return;
 
-        enemy = other.gameObject.GetComponent<EnemyMove>();
-        enemy.rotation180();
+        boss = other.gameObject.GetComponent<BossMove>();
+        boss.onEdge(sideEdge);
     }
 }

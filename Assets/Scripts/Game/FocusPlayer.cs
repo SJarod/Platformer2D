@@ -39,4 +39,9 @@ public class FocusPlayer : MonoBehaviour
     {
         offset = value;
     }
+
+    public float getLiftY()
+    {
+        return lift.transform.position.y;
+    }
 }

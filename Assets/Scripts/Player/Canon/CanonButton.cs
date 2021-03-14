@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Kill : MonoBehaviour
+public class CanonButton : MonoBehaviour
 {
+    Canon canon;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        canon = GetComponentInParent<Canon>();
     }
 
     // Update is called once per frame
@@ -16,12 +18,11 @@ public class Kill : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.tag != "Enemy")
+        if (!collision.gameObject.CompareTag("Player"))
             return;
 
-        Destroy(other.gameObject);
-        GetComponentInParent<Rigidbody>().AddForce(Vector3.up * 10.0f, ForceMode.Impulse);
+        canon.shoot();
     }
 }
