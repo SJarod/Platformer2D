@@ -1,5 +1,34 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &5952228918986513590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400513519540691696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b926ad42cc15094e9f2a1f72ca2a1db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 5
+  doorSpeed: 5
+  prefabObstacle: {fileID: 0}
+  prefabHealthDisplay: {fileID: 0}
+--- !u!114 &6689990582340694299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400513519540691696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bfd2ba48ccdaa34a913e618b1f622cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smooth: 5
 --- !u!1001 &8033109025232259310
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10,7 +39,7 @@ PrefabInstance:
     - target: {fileID: 8940992955866343966, guid: 4359dabed7a1ff24b87f7f27e519f067,
         type: 3}
       propertyPath: m_Name
-      value: ZoomTrigger
+      value: BossTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 8940992955866343967, guid: 4359dabed7a1ff24b87f7f27e519f067,
         type: 3}
@@ -85,3 +114,9 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 8940992955866343964, guid: 4359dabed7a1ff24b87f7f27e519f067, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4359dabed7a1ff24b87f7f27e519f067, type: 3}
+--- !u!1 &1400513519540691696 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8940992955866343966, guid: 4359dabed7a1ff24b87f7f27e519f067,
+    type: 3}
+  m_PrefabInstance: {fileID: 8033109025232259310}
+  m_PrefabAsset: {fileID: 0}

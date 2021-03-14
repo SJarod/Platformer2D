@@ -9,20 +9,23 @@ public class ZoomBoss : MonoBehaviour
 
     [SerializeField] private float smooth = 5f;
 
-    private Vector3 offset = new Vector3(0, 0, -60.0f);
-    private bool faceToBoss = false;
+    private Vector3 offset = new Vector3(0, 0, -45f);
+    private Boss b;
 
     // Start is called before the first frame update
     void Start()
     {
         cam = Camera.main;
         fp = cam.GetComponent<FocusPlayer>();
+        b = GetComponent<Boss>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (faceToBoss)
+        offset = new Vector3(0, Mathf.Clamp(fp.getLiftY() - transform.position.y, -25, 25), offset.z);
+
+        if (b.isOnFight())
             cam.transform.position = Vector3.Lerp(cam.transform.position, transform.position + offset, smooth * Time.fixedDeltaTime);
     }
 
@@ -31,7 +34,6 @@ public class ZoomBoss : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
-        faceToBoss = true;
         fp.enabled = false;
     }
 
@@ -40,7 +42,6 @@ public class ZoomBoss : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
-        faceToBoss = false;
         fp.enabled = true;
         fp.zoomIn();
     }

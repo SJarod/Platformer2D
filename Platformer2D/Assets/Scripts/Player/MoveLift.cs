@@ -20,7 +20,6 @@ public class MoveLift : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //TODO : button to speed up lifts
         if (Input.GetButton("Vertical"))
             transform.Translate(Vector3.up * Input.GetAxis("Vertical") * liftSpeed * Time.deltaTime);
 

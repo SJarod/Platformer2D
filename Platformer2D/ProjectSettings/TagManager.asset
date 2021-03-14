@@ -9,6 +9,13 @@ TagManager:
   - Enemy
   - Platform
   - Trigger
+  - Display
+  - BossEntity
+  - Bullet
+  - Menu
+  - YouWin
+  - YouLose
+  - Pause
   layers:
   - Default
   - TransparentFX
