@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Kill : MonoBehaviour
+public class EnemyEdge : MonoBehaviour
 {
+    EnemyMove enemy;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -21,7 +23,7 @@ public class Kill : MonoBehaviour
         if (other.gameObject.tag != "Enemy")
             return;
 
-        Destroy(other.gameObject);
-        GetComponentInParent<Rigidbody>().AddForce(Vector3.up * 10.0f, ForceMode.Impulse);
+        enemy = other.gameObject.GetComponent<EnemyMove>();
+        enemy.rotation180();
     }
 }

@@ -7,6 +7,9 @@ public class MoveLift : MonoBehaviour
     GameObject player;
 
     public float liftSpeed = 5.0f;
+    public float maxLift = 2.5f;
+
+    private float fromPlayerY = 0.34f;
 
     // Start is called before the first frame update
     void Start()
@@ -21,9 +24,8 @@ public class MoveLift : MonoBehaviour
         if (Input.GetButton("Vertical"))
             transform.Translate(Vector3.up * Input.GetAxis("Vertical") * liftSpeed * Time.deltaTime);
 
-        //TODO : new range for new level
-        float maxHeight = player.transform.position.y + 2.5f;
-        float minHeight = player.transform.position.y - 2.5f;
+        float maxHeight = player.transform.position.y + maxLift;
+        float minHeight = player.transform.position.y - fromPlayerY;
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, minHeight, maxHeight), transform.position.z);
     }
 }
