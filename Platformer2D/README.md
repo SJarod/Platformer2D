@@ -4,6 +4,9 @@
 ## Presentation
 This project is a 2D platformer where the player plays as a fork lift. Then the player can play arround with boxes placed on the map, climb walls with them and shoot enemies. The platformer is in a storehouse, so platforms may look like lifts or boxes.
 
+A link to the full project file (open with Unity)
+https://drive.google.com/file/d/1vGeiXJ05bLUeL4RAJMVVZiPPnxb02Z3i/view?usp=sharing
+
 ## Controls
 | Key | description |
 | -- | -- |
