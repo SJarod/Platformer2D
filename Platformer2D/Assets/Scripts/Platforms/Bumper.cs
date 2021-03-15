@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class Bumper : MonoBehaviour
 {
-    public float bumpForce = 20f;
+    public float    bumpForce = 20f;
+
+    private float   gameSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        gameSpeed = GameObject.Find("Canvas").GetComponent<Menu>().gameSpeed;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -24,6 +26,6 @@ public class Bumper : MonoBehaviour
             return;
 
         Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
-        rb.velocity = new Vector3(rb.velocity.x, bumpForce, 0);
+        rb.velocity = new Vector3(rb.velocity.x * gameSpeed, bumpForce * gameSpeed, 0);
     }
 }

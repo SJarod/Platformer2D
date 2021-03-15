@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BackgroundCamera : MonoBehaviour
 {
-    private Camera mainCam;
+    private Camera  mainCam;
 
-    private float mainOffset = 56.3f;
+    [SerializeField] private float   mainOffset = 56.3f;
 
     // Start is called before the first frame update
     void Start()

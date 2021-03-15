@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FocusPlayer : MonoBehaviour
 {
-    GameObject player;
-    GameObject lift;
+    private GameObject  player;
+    private GameObject  lift;
 
     [SerializeField] private float smooth = 5f;
     [SerializeField] private float liftZoomSpeed = 1.5f;

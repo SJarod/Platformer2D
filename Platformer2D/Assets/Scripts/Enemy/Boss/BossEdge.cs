@@ -5,9 +5,9 @@ using UnityEngine;
 public class BossEdge : MonoBehaviour
 {
     //left : -1, right : 1
-    public int sideEdge = 1;
+    public int  sideEdge = 1;
 
-    BossMove boss;
+    private BossMove    boss;
 
     // Start is called before the first frame update
     void Start()

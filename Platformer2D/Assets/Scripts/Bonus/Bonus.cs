@@ -12,9 +12,9 @@ public enum Buffs
     ENDJUMP,
     ENDSPEED,
 
+    HEAL,
     CHECKPOINT,
     END,
-    HEAL,
 }
 
 public class Bonus : MonoBehaviour
@@ -38,6 +38,8 @@ public class Bonus : MonoBehaviour
         if (other.gameObject.tag != "Player")
             return;
 
+        Move move = other.GetComponent<Move>();
+
         switch (b)
         {
             case Buffs.BOOSTMAXLIFT:
@@ -47,12 +49,12 @@ public class Bonus : MonoBehaviour
                 }
             case Buffs.BOOSTJUMP:
                 {
-                    other.GetComponent<Move>().jumpForce = 20;
+                    move.jumpForce = move.getBaseJumpForce() * 2;
                     break;
                 }
             case Buffs.BOOSTSPEED:
                 {
-                    other.GetComponent<Move>().moveSpeed = 20;
+                    move.moveSpeed = move.getBaseMoveSpeed() * 2;
                     break;
                 }
             case Buffs.ENDMAXLIFT:
@@ -62,13 +64,11 @@ public class Bonus : MonoBehaviour
                 }
             case Buffs.ENDJUMP:
                 {
-                    Move move = other.GetComponent<Move>();
                     move.jumpForce = move.getBaseJumpForce();
                     break;
                 }
             case Buffs.ENDSPEED:
                 {
-                    Move move = other.GetComponent<Move>();
                     move.moveSpeed = move.getBaseMoveSpeed();
                     break;
                 }
@@ -80,6 +80,12 @@ public class Bonus : MonoBehaviour
                 {
                     if (other.gameObject.GetComponent<Player>().heal())
                         Destroy(this.gameObject);
+                    break;
+                }
+            case Buffs.END:
+                {
+                    Menu menu = GameObject.Find("Canvas").GetComponent<Menu>();
+                    menu.showYouWin();
                     break;
                 }
             default:

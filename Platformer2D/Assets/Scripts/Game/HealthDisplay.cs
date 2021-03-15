@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class HealthDisplay : MonoBehaviour
 {
-    Player player;
-    BossHealth boss;
+    private Player      player;
+    private BossHealth  boss;
 
-    public GameObject prefab;
+    public GameObject   prefab;
     //players's health or boss' health
-    public bool isPlayer = true;
+    public bool         isPlayer = true;
 
-    private Boss bossInfo;
-    private GameObject bossBar = null;
+    private Boss        bossInfo;
+    private GameObject  bossBar = null;
 
     // Start is called before the first frame update
     void Start()
@@ -60,11 +60,14 @@ public class HealthDisplay : MonoBehaviour
             if (index > 0 && index > h)
                 Destroy(transform.GetChild(index).gameObject);
 
-            for (int i = 0; i < h; ++i)
+            if (h != 0)
             {
-                //avoid first child (black and yellow background)
-                int ii = i + 1;
-                transform.GetChild(ii).Rotate(0, 0, isEven(ii));
+                for (int i = 0; i < h; ++i)
+                {
+                    //avoid first child (black and yellow background)
+                    int ii = i + 1;
+                    transform.GetChild(ii).Rotate(0, 0, isEven(ii));
+                }
             }
         }
     }
@@ -78,6 +81,7 @@ public class HealthDisplay : MonoBehaviour
             return -1;  //odd
     }
 
+    //instantiate a new gear (for the HUD)
     public void instantiateHeal(int health)
     {
         int i = health - 1;
@@ -86,7 +90,8 @@ public class HealthDisplay : MonoBehaviour
         go.transform.SetParent(transform, false);
     }
 
-    public void instantiateBossHealth(GameObject prefabBossHealth)
+    //instantiate a new health bar (for the boss)
+    public void instantiateBossHealth(ref GameObject prefabBossHealth)
     {
         prefabBossHealth.GetComponentInChildren<RawImage>().color = Color.red;
         prefabBossHealth.GetComponentInChildren<HealthDisplay>().isPlayer = false;

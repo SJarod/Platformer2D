@@ -6,24 +6,26 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    Rigidbody rb;
-    Camera cam;
+    Rigidbody       rb;
+    Camera          cam;
 
-    bool isJumping = false;
+    private bool    isJumping = false;
 
-    public int moveSpeed = 10;
-    public int jumpForce = 10;
+    public int      moveSpeed = 10;
+    public int      jumpForce = 10;
 
-    public int rotatingSpeed = 10;
+    public int      rotatingSpeed = 10;
 
-    private int baseMoveSpeed;
-    private int baseJumpForce;
+    private int     baseMoveSpeed;
+    private int     baseJumpForce;
 
     //direction is used for moving
     //orientation is used for shooting
     //-1 : left, 1 : right
     int direction = 0;          //player's direction (direction vector, left or right)
     int orientation = 1;
+
+    private float gameSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +40,8 @@ public class Move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        gameSpeed = GameObject.Find("Canvas").GetComponent<Menu>().gameSpeed;
+
         if (!Input.GetButton("Horizontal"))
             direction = 0;
         else
@@ -55,12 +59,12 @@ public class Move : MonoBehaviour
         {
             isJumping = true;
             if (rb.velocity.y > 0)
-                rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y + jumpForce, 0);
+                rb.velocity = new Vector3(rb.velocity.x * gameSpeed, (rb.velocity.y + jumpForce) * gameSpeed, 0);
             else
-                rb.velocity = new Vector3(rb.velocity.x, jumpForce, 0);
+                rb.velocity = new Vector3(rb.velocity.x * gameSpeed, jumpForce * gameSpeed, 0);
         }
 
-        rb.velocity = new Vector3(direction * moveSpeed, rb.velocity.y, 0);
+        rb.velocity = new Vector3(direction * moveSpeed * gameSpeed, rb.velocity.y * gameSpeed, 0);
     }
 
     private void OnTriggerEnter(Collider other)

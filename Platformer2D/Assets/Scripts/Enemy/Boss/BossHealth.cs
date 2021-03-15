@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class BossHealth : MonoBehaviour
 {
-    public int health = 5;
+    public int      health = 5;
+    public float    dmgCoolDown = 1f;
 
-    private float oldTime = 0f;
+    private float   oldTime = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,7 @@ public class BossHealth : MonoBehaviour
 
     public void takeDamage(int dmg)
     {
-        if (Time.time - oldTime < 1f)
+        if (Time.time - oldTime < dmgCoolDown)
             return;
 
         oldTime = Time.time;
