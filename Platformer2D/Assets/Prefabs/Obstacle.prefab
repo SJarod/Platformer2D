@@ -106,7 +106,6 @@ GameObject:
   - component: {fileID: 4640084903094155868}
   - component: {fileID: 4640084903094155867}
   - component: {fileID: 4640084903094155866}
-  - component: {fileID: 5092720054626964240}
   m_Layer: 0
   m_Name: Obstacle
   m_TagString: Obstacle
@@ -207,18 +206,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &5092720054626964240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4640084903094155865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05dcb5946130a2d428369fbdb74a088c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4640084903610707349
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,6 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75a3e865603f6c4a91ba732e0cf78b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bounceOnEnemy: 5
 --- !u!1 &4640084903839672837
 GameObject:
   m_ObjectHideFlags: 0
