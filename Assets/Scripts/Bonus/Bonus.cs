@@ -38,6 +38,7 @@ public class Bonus : MonoBehaviour
         if (other.gameObject.tag != "Player")
             return;
 
+        Player player = other.GetComponent<Player>();
         Move move = other.GetComponent<Move>();
 
         switch (b)
@@ -74,6 +75,7 @@ public class Bonus : MonoBehaviour
                 }
             case Buffs.CHECKPOINT:
                 {
+                    player.respawnPoint = transform.position;
                     break;
                 }
             case Buffs.HEAL:

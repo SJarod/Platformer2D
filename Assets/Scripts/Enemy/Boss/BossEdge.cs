@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossEdge : MonoBehaviour
 {
     //left : -1, right : 1
-    public int  sideEdge = 1;
+    public int          sideEdge = 1;
 
     private BossMove    boss;
 

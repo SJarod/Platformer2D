@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     public float    dmgCoolDown = 1f;
     private float   dmgTime = 0f;
 
+    public Vector3  respawnPoint = new Vector3(0, 3, 0);
+
     Menu menu;
 
     // Start is called before the first frame update

@@ -47,9 +47,8 @@ The player has no double jump but can jump in the air (while falling).
 ![unity](screenshot/unity.png)
 - when game is paused, the player is falling slowly
 - enemies sometimes destroys itself when colliding with the player
-	- player's trigger are triggered
+	- player's trigger is triggered
 - enemies are not directly on the ground but slowly falling
-- the background camera reinitialize its position (for example when it arrives of the right edge of the background, it instantly sets its position to the left edge's), so this reinitialization causes the background's floor not to be always aligned.
 - the player can pause in main menu
 - obstacles are not paused
 - canon leds are not accurate, so as the damage
@@ -59,4 +58,4 @@ The player has no double jump but can jump in the air (while falling).
 - boss
 	- spawn enemies
 	- spawn obstacles
-- checkpoint
+- stack the boxes (on the lift or with each other)

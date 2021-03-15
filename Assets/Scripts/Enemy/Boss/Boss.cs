@@ -5,7 +5,6 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
     public float        smooth = 5f;
-
     public GameObject   prefabHealthDisplay;
 
     private Light       mainLight;
@@ -41,6 +40,7 @@ public class Boss : MonoBehaviour
 
         float dt = Time.fixedDeltaTime * smooth;
 
+        //change light to see the boss better
         if (!onFight)
         {
             oldTime = Time.time;
@@ -58,7 +58,8 @@ public class Boss : MonoBehaviour
         {
             defeated = true;
             Destroy(boss);
-            openDoor();
+            openDoor("BossEnter");
+            openDoor("BossExit");
         }
     }
 
@@ -99,16 +100,18 @@ public class Boss : MonoBehaviour
         GameObject door = GameObject.Find("BossEnter");
         Transform parent = door.transform.parent;
 
+        //values for closing door found by hardcoding
         Vector3 target = new Vector3(door.transform.position.x, parent.position.y - (parent.localScale.y / 2 + 5.7f), 0);
 
         door.transform.position = Vector3.Lerp(door.transform.position, target, Time.fixedDeltaTime * smooth * gameSpeed);
     }
 
-    private void openDoor()
+    private void openDoor(string doorName)
     {
-        GameObject door = GameObject.Find("BossExit");
+        GameObject door = GameObject.Find(doorName);
         Transform parent = door.transform.parent;
 
+        //values for opening door found by hardcoding
         Vector3 target = new Vector3(door.transform.position.x, parent.position.y - parent.localScale.y / 2, 0);
 
         door.transform.position = Vector3.Lerp(door.transform.position, target, Time.fixedDeltaTime * smooth * gameSpeed);
@@ -121,11 +124,11 @@ public class Boss : MonoBehaviour
 
     private void spawnObstacle()
     {
-
+        //TODO
     }
 
     private void spawnEnemy()
     {
-
+        //TODO
     }
 }

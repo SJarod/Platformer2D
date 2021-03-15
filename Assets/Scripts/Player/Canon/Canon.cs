@@ -36,7 +36,7 @@ public class Canon : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         gameSpeed = GameObject.Find("Canvas").GetComponent<Menu>().gameSpeed;
 

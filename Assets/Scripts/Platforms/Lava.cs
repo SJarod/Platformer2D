@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Lava : MonoBehaviour
 {
-    public Vector3  respawnPoint = new Vector3(0, 3, 0);
     public float    limit = -15f;
 
     GameObject      player;
@@ -37,6 +36,6 @@ public class Lava : MonoBehaviour
 
     private void Respawn(GameObject player)
     {
-        player.transform.position = respawnPoint;
+        player.transform.position = player.GetComponent<Player>().respawnPoint;
     }
 }

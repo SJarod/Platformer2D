@@ -533,7 +533,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 147f233d9add29641b083979500c163e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -579,8 +579,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65ed288fe7cbc0742835328e3ab4b923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabObstacle: {fileID: 0}
-  prefabCube: {fileID: 0}
+  prefabBullet: {fileID: 0}
+  buttonCD: 30
+  shootForce: 100
 --- !u!1 &6214348941748277437
 GameObject:
   m_ObjectHideFlags: 0
