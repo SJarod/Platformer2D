@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Lava : MonoBehaviour
 {
-    GameObject player;
+    public Vector3  respawnPoint = new Vector3(0, 3, 0);
+    public float    limit = -15f;
+
+    GameObject      player;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +18,8 @@ public class Lava : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.transform.position.y <= -15)
+        //if the player is falling under the map
+        if (player.transform.position.y <= limit)
         {
             player.GetComponent<Player>().takeDamage();
             Respawn(player);
@@ -33,6 +37,6 @@ public class Lava : MonoBehaviour
 
     private void Respawn(GameObject player)
     {
-        player.transform.position = new Vector3(0, 3, 0);
+        player.transform.position = respawnPoint;
     }
 }

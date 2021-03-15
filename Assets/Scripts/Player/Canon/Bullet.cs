@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public int damage = 1;
+    public int          damage = 1;
 
-    private BossHealth boss;
+    private BossHealth  boss;
 
     // Start is called before the first frame update
     void Start()

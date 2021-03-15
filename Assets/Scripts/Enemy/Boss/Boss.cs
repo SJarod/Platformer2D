@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
-    public float doorSpeed = 5f;
+    public float        smooth = 5f;
 
-    public GameObject prefabHealthDisplay;
+    public GameObject   prefabHealthDisplay;
 
-    private Light mainLight;
+    private Light       mainLight;
 
-    private GameObject boss;
-    private BossHealth hp;
+    private GameObject  boss;
+    private BossHealth  hp;
 
-    GameObject panel;
+    private GameObject  panel;
 
     //when the player is in the trigger, face to the boss
-    private bool onFight = false;
+    private bool    onFight = false;
     //when the boss is defeated
-    private bool defeated = false;
-    private float oldTime = 0;
+    private bool    defeated = false;
+    private float   oldTime = 0;
+
+    private float   gameSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +37,9 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float dt = Time.fixedDeltaTime * 5f;
+        gameSpeed = GameObject.Find("Canvas").GetComponent<Menu>().gameSpeed;
+
+        float dt = Time.fixedDeltaTime * smooth;
 
         if (!onFight)
         {
@@ -77,7 +81,7 @@ public class Boss : MonoBehaviour
             boss.GetComponent<BossMove>().enabled = true;
         }
 
-        panel.GetComponentInChildren<HealthDisplay>().instantiateBossHealth(prefabHealthDisplay);
+        panel.GetComponentInChildren<HealthDisplay>().instantiateBossHealth(ref prefabHealthDisplay);
     }
 
     private void OnTriggerExit(Collider other)
@@ -97,7 +101,7 @@ public class Boss : MonoBehaviour
 
         Vector3 target = new Vector3(door.transform.position.x, parent.position.y - (parent.localScale.y / 2 + 5.7f), 0);
 
-        door.transform.position = Vector3.Lerp(door.transform.position, target, Time.fixedDeltaTime * doorSpeed);
+        door.transform.position = Vector3.Lerp(door.transform.position, target, Time.fixedDeltaTime * smooth * gameSpeed);
     }
 
     private void openDoor()
@@ -107,7 +111,7 @@ public class Boss : MonoBehaviour
 
         Vector3 target = new Vector3(door.transform.position.x, parent.position.y - parent.localScale.y / 2, 0);
 
-        door.transform.position = Vector3.Lerp(door.transform.position, target, Time.fixedDeltaTime * doorSpeed);
+        door.transform.position = Vector3.Lerp(door.transform.position, target, Time.fixedDeltaTime * smooth * gameSpeed);
     }
 
     public bool isDefeated()

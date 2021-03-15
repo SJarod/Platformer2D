@@ -6,10 +6,12 @@ using UnityEngine;
 
 public class BossMove : MonoBehaviour
 {
-    public float bossSpeed = 10f;
+    public float        bossSpeed = 10f;
 
-    private int direction = 1;
-    Rigidbody rb;
+    private int         direction = 1;
+    private Rigidbody   rb;
+
+    private float       gameSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +23,9 @@ public class BossMove : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.position += Vector3.right * direction * bossSpeed * Time.fixedDeltaTime;
+        gameSpeed = GameObject.Find("Canvas").GetComponent<Menu>().gameSpeed;
+
+        transform.position += Vector3.right * direction * bossSpeed * Time.fixedDeltaTime * gameSpeed;
     }
 
     public void onEdge(int whichEdge)

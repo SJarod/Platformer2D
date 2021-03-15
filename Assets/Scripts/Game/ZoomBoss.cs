@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class ZoomBoss : MonoBehaviour
 {
-    Camera cam;
-    FocusPlayer fp;
+    private Camera      cam;
+    private FocusPlayer fp;
 
-    [SerializeField] private float smooth = 5f;
+    [SerializeField] private float  smooth = 5f;
+    [SerializeField] private float  clampY = 25f;
 
-    private Vector3 offset = new Vector3(0, 0, -45f);
-    private Boss b;
+    private Vector3     offset = new Vector3(0, 0, -45f);
+    private Boss        b;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +24,7 @@ public class ZoomBoss : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        offset = new Vector3(0, Mathf.Clamp(fp.getLiftY() - transform.position.y, -25, 25), offset.z);
+        offset = new Vector3(0, Mathf.Clamp(fp.getLiftY() - transform.position.y, -clampY, clampY), offset.z);
 
         if (b.isOnFight())
             cam.transform.position = Vector3.Lerp(cam.transform.position, transform.position + offset, smooth * Time.fixedDeltaTime);

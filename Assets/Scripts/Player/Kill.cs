@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Kill : MonoBehaviour
 {
+    public float    bounceOnEnemy = 5f;
+
+    private float   gameSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +17,7 @@ public class Kill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        gameSpeed = GameObject.Find("Canvas").GetComponent<Menu>().gameSpeed;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,6 +28,6 @@ public class Kill : MonoBehaviour
         Destroy(other.gameObject);
         Rigidbody rb = GetComponentInParent<Rigidbody>();
 
-        rb.velocity = new Vector3(rb.velocity.x, 5, 0);
+        rb.velocity = new Vector3(rb.velocity.x * gameSpeed, bounceOnEnemy * gameSpeed, 0);
     }
 }

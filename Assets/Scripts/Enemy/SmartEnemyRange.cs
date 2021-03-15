@@ -2,18 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Zoom : MonoBehaviour
+public class SmartEnemyRange : MonoBehaviour
 {
-    public Vector3 offset = new Vector3(0, 3.0f, -25.0f);
-
-    private Camera      cam;
-    private FocusPlayer fp;
+    private Vector3 target;
 
     // Start is called before the first frame update
     void Start()
     {
-        cam = Camera.main;
-        fp = cam.GetComponent<FocusPlayer>();
+        target = Vector3.zero;
     }
 
     // Update is called once per frame
@@ -27,7 +23,7 @@ public class Zoom : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
-        fp.zoomOut(offset);
+        target = other.transform.position;
     }
 
     private void OnTriggerExit(Collider other)
@@ -35,6 +31,11 @@ public class Zoom : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
-        fp.zoomIn();
+        target = Vector3.zero;
+    }
+
+    public Vector3 getTarget()
+    {
+        return target;
     }
 }

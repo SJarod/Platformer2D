@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Stack : MonoBehaviour
 {
-    private bool onLift = false;
+    private bool    onLift = false;
+    private Vector3 scale;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        scale = new Vector3(2f, 1.25f, 2f);
     }
 
     // Update is called once per frame
@@ -42,6 +43,6 @@ public class Stack : MonoBehaviour
         transform.parent = null;
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         transform.rotation = Quaternion.Euler(0, 0, 0);
-        transform.localScale = new Vector3(2, 1.25f, 2);
+        transform.localScale = scale;
     }
 }

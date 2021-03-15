@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class MoveLift : MonoBehaviour
 {
-    GameObject player;
+    GameObject      player;
 
-    public float liftSpeed = 5.0f;
-    public float maxLift = 2.5f;
+    public float    liftSpeed = 5.0f;
+    public float    maxLift = 2.5f;
 
-    private float fromPlayerY = 0.34f;
+    private float   fromPlayerY = 0.34f;
+    private float   gameSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -20,8 +21,10 @@ public class MoveLift : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        gameSpeed = GameObject.Find("Canvas").GetComponent<Menu>().gameSpeed;
+
         if (Input.GetButton("Vertical"))
-            transform.Translate(Vector3.up * Input.GetAxis("Vertical") * liftSpeed * Time.deltaTime);
+            transform.Translate(Vector3.up * Input.GetAxis("Vertical") * liftSpeed * Time.deltaTime * gameSpeed);
 
         float maxHeight = player.transform.position.y + maxLift;
         float minHeight = player.transform.position.y - fromPlayerY;

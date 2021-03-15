@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class PlatformMove : MonoBehaviour
 {
-    public float liftSpeed = 10.0f;
-    public float min = 15f;
-    public float max = 25f;
+    public float    liftSpeed = 10.0f;
+    public float    min = 15f;
+    public float    max = 25f;
 
-    private int direction = 1;
+    private int     direction = 1;
+
+    private float   gameSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        gameSpeed = GameObject.Find("Canvas").GetComponent<Menu>().gameSpeed;
+
         changeDirection();
 
-        transform.position += Vector3.up * direction * liftSpeed * Time.deltaTime;
+        transform.position += Vector3.up * direction * liftSpeed * Time.deltaTime * gameSpeed;
     }
 
     private void changeDirection()

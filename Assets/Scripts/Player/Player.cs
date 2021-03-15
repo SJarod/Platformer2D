@@ -1,19 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    public int health = 5;
-    private int maxHealth;
+    public int      health = 5;
+    private int     maxHealth;
 
-    private float dmgTime = 0f;
+    public float    dmgCoolDown = 1f;
+    private float   dmgTime = 0f;
+
+    Menu menu;
 
     // Start is called before the first frame update
     void Start()
     {
         maxHealth = health;
+
+        menu = GameObject.Find("Canvas").GetComponent<Menu>();
     }
 
     // Update is called once per frame
@@ -24,14 +28,14 @@ public class Player : MonoBehaviour
 
     public void takeDamage()
     {
-        if (Time.time - dmgTime < 1f)
+        if (Time.time - dmgTime < dmgCoolDown)
             return;
 
         dmgTime = Time.time;
 
         if (--health <= 0)
         {
-            SceneManager.LoadScene("Platformer2D");
+            menu.showYouLose();
         }
     }
 

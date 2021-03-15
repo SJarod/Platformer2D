@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class ShootBox : MonoBehaviour
 {
-    Rigidbody rbBox;
+    Rigidbody   rbBox;
+    Move        move;
 
-    Move move;
+    public float    shootForce = 10f;
+
+    private float   gameSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -17,13 +20,17 @@ public class ShootBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        gameSpeed = GameObject.Find("Canvas").GetComponent<Menu>().gameSpeed;
+
         if (rbBox == null)
             return;
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            rbBox.AddForce(Vector3.up * 10, ForceMode.Impulse);
-            rbBox.AddForce(Vector3.right * move.getOrientation() * 100, ForceMode.Impulse);
+            float force = shootForce * 10f;
+
+            rbBox.AddForce(Vector3.up * shootForce * gameSpeed, ForceMode.Impulse);
+            rbBox.AddForce(Vector3.right * move.getOrientation() * force * gameSpeed, ForceMode.Impulse);
         }
     }
 
