@@ -1,4 +1,3 @@
-
 # Platformer2D
 ###### Jarod Sengkeo
 
@@ -51,7 +50,6 @@ The player has no double jump but can jump in the air (while falling).
 - enemies are not directly on the ground but slowly falling
 - the player can pause in main menu
 - obstacles are not paused
-- canon leds are not accurate, so as the damage
 
 ## Next features
 - smart enemy (follows the player)
