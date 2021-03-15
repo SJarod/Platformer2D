@@ -13,7 +13,6 @@ public class HealthDisplay : MonoBehaviour
     public bool         isPlayer = true;
 
     private Boss        bossInfo;
-    private GameObject  bossBar = null;
 
     // Start is called before the first frame update
     void Start()
@@ -24,10 +23,19 @@ public class HealthDisplay : MonoBehaviour
         if (!bossInfo.isDefeated())
             boss = GameObject.FindGameObjectWithTag("BossEntity").GetComponent<BossHealth>();
 
-        for (int i = 0; i < player.health; ++i)
+        int h = 0;
+        if (isPlayer)
+            h = player.health;
+        else if (!bossInfo.isDefeated())
+            h = boss.health;
+
+        if (h != 0)
         {
-            GameObject go = Instantiate(prefab, new Vector3(-128 + i * 62, 24 * isEven(i), 0), Quaternion.identity);
-            go.transform.SetParent(transform, false);
+            for (int i = 0; i < h; ++i)
+            {
+                GameObject go = Instantiate(prefab, new Vector3(-128 + i * 62, 24 * isEven(i), 0), Quaternion.identity);
+                go.transform.SetParent(transform, false);
+            }
         }
     }
 
@@ -35,12 +43,12 @@ public class HealthDisplay : MonoBehaviour
     void Update()
     {
         //there are 6 child (5 gears for health and 1 back (black and yellow background))
-        int index = transform.childCount - 1;
+        int gears = transform.childCount - 1;
 
         if (isPlayer)
         {
-            if (index > 0 && index > player.health)
-                Destroy(transform.GetChild(index).gameObject);
+            if (gears > 0 && gears > player.health)
+                Destroy(transform.GetChild(gears).gameObject);
 
             for (int i = 0; i < player.health; ++i)
             {
@@ -52,13 +60,13 @@ public class HealthDisplay : MonoBehaviour
         else
         {
             int h;
-            if (bossInfo.isDefeated())
-                h = 0;
-            else
+            if (!bossInfo.isDefeated())
                 h = boss.health;
+            else
+                h = 0;
 
-            if (index > 0 && index > h)
-                Destroy(transform.GetChild(index).gameObject);
+            if (gears > 0 && gears > h)
+                Destroy(transform.GetChild(gears).gameObject);
 
             if (h != 0)
             {
@@ -88,20 +96,5 @@ public class HealthDisplay : MonoBehaviour
 
         GameObject go = Instantiate(prefab, new Vector3(-128 + i * 62, 24 * isEven(i), 0), Quaternion.identity);
         go.transform.SetParent(transform, false);
-    }
-
-    //instantiate a new health bar (for the boss)
-    public void instantiateBossHealth(ref GameObject prefabBossHealth)
-    {
-        prefabBossHealth.GetComponentInChildren<RawImage>().color = Color.red;
-        prefabBossHealth.GetComponentInChildren<HealthDisplay>().isPlayer = false;
-
-        bossBar = Instantiate(prefabBossHealth, new Vector3(0, 400, 0), Quaternion.identity);
-        bossBar.transform.SetParent(transform.parent, false);
-    }
-
-    public void destroyBossHealth()
-    {
-        Destroy(bossBar);
     }
 }

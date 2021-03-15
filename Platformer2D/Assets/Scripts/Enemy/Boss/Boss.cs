@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Boss : MonoBehaviour
 {
@@ -13,12 +14,12 @@ public class Boss : MonoBehaviour
     private BossHealth  hp;
 
     private GameObject  panel;
+    private GameObject  bossBar = null;
 
     //when the player is in the trigger, face to the boss
     private bool    onFight = false;
     //when the boss is defeated
     private bool    defeated = false;
-    private float   oldTime = 0;
 
     private float   gameSpeed;
 
@@ -43,7 +44,6 @@ public class Boss : MonoBehaviour
         //change light to see the boss better
         if (!onFight)
         {
-            oldTime = Time.time;
             mainLight.transform.rotation = Quaternion.Lerp(mainLight.transform.rotation, Quaternion.Euler(60, 0, 0), dt);
             mainLight.intensity = Mathf.Lerp(mainLight.intensity, 1f, dt);
         }
@@ -73,7 +73,6 @@ public class Boss : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
-        oldTime = Time.time;
         onFight = true;
 
         if (hp.health > 0)
@@ -82,7 +81,7 @@ public class Boss : MonoBehaviour
             boss.GetComponent<BossMove>().enabled = true;
         }
 
-        panel.GetComponentInChildren<HealthDisplay>().instantiateBossHealth(ref prefabHealthDisplay);
+        instantiateBossHealth(ref prefabHealthDisplay);
     }
 
     private void OnTriggerExit(Collider other)
@@ -92,7 +91,21 @@ public class Boss : MonoBehaviour
 
         onFight = false;
 
-        panel.GetComponentInChildren<HealthDisplay>().destroyBossHealth();
+        destroyBossHealth();
+    }
+
+    //instantiate a new health bar (for the boss)
+    public void instantiateBossHealth(ref GameObject prefabBossHealth)
+    {
+        prefabBossHealth.GetComponentInChildren<RawImage>().color = Color.red;
+        prefabBossHealth.GetComponentInChildren<HealthDisplay>().isPlayer = false;
+
+        bossBar = Instantiate(prefabBossHealth, new Vector3(0, 400, 0), Quaternion.identity);
+        bossBar.transform.SetParent(panel.transform, false);
+    }
+    public void destroyBossHealth()
+    {
+        Destroy(bossBar);
     }
 
     private void closeDoor()

@@ -43,7 +43,7 @@ public class Canon : MonoBehaviour
         for (int i = 0; i < 3; ++i)
         {
             if (Time.time - button[i].getOldTime() < buttonCD)
-                return;
+                continue;
 
             button[i].gameObject.SetActive(true);
         }
